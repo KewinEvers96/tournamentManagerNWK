@@ -1,0 +1,45 @@
+{% extends 'home.html' %} 
+
+{% block title %}{{ match.homeTeam }} {{ match.guestTeam }} {% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="container d-flex justify-content-center">
+        <div class="card" style="width: 80%;">
+            <div class="card-header" style="text-align: center; font-weight: bolder;">
+                Score
+            </div>
+            <div class="card-body row d-flex justify-content-around" style="background-color: #d1d1d1; margin: 0">
+                <div class="container col-6 d-flex justify-content-center">
+                    <div class="card" style="width: 40%;">
+                        <div class="card-header" style="background-color: red; color: white; text-align: center;">
+                            <b>{{ match.homeTeam }}</b>
+                        </div>
+                        <div class="card-body" style="font-weight: bolder;">
+                            {% if match.homeScore is None %}
+                                -
+                            {% else %}
+                                {{ match.homeScore}}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="container col d-flex justify-content-center">
+                    <div class="card" style="width: 40%;">
+                        <div class="card-header" style="background-color: blue; color: white; text-align: center;">
+                            <b>{{ match.guestTeam}}</b>
+                        </div>
+                        <div class="card-body" style="font-weight: bolder;">
+                            {% if match.homeScore is None %}
+                                -
+                            {% else %}
+                                {{ match.homeScore}}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+{% if message %}
+<div class="container">
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+</div>
+{% endif %}
+<div class="container">
+    <form method="POST" action="{% url 'tournament:tournament_inscription' tournament_id %}">
+        {% csrf_token %}
+        <p>Are you sure you want to enroll to <b>{{ tournament_name }}</b></p>
+        <input value="Enroll" type="submit" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}

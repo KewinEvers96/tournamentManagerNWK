@@ -1,0 +1,81 @@
+{% extends 'home.html' %}
+
+{% block title %} {{ object.name  }} {% endblock %}
+
+{% block content %}
+
+{% if message %}
+<div class="container">
+    <div class="alert alert-danger">{{ message }}</div>
+</div>
+{% endif %}
+{% if message_successful %}
+<div class="container">
+    <div class="alert alert-success">{{ message_successful }}</div>
+</div>
+{% endif %}
+<div class="container">
+    <h1 class="display-2">{{ object.name }}</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Organizer</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Finish Date</th>
+                <th scope="col">Occupancy</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ object.organizer }}</td>
+                <td>{{ object.startDate }}</td>
+                <td>{{ object.finishDate }}</td>
+                <td>{{ competitorsCount }} / {{ object.maxParticipants }}</td>
+                <td>{% if object.started and object.finished %}
+                        <span style="color: gray">Finished</span> 
+                    {% elif object.started %} 
+                        <span style="color: green">Started</span>
+                    {% else %} 
+                        <span style="color: red">Not started</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a class="btn btn-success" href="{% url 'tournament:tournament_inscription' object.id %}">Enroll</a>
+    <a class="btn btn-danger" href="{% url 'tournament:tournament_uninscription' object.id %}">Unenroll</a>
+    <br>
+    <div class="container row">
+        <div class="col-12 col-md-6">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Position</th>
+                        <th scope="col">Competitor</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for competitor_participation in competitors %}
+                    <tr>
+                        <td>{{ competitor_participation.position }}</td>
+                        <td>{{ competitor_participation.competitor }}</td>
+                        <td>{{ competitor_participation.score }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col col-md">
+            <h1 class="display-2">Next Matches</h1>
+            <ul class="list-group m-5">
+                {% for match in matches %} 
+                    <li class="list-group-item"><a href="{% url 'tournament:match_detail' match.id %}">{{ match }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

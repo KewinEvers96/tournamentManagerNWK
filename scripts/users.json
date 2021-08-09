@@ -1,0 +1,46 @@
+[
+    {
+        "username": "luffy",
+        "password": "gatos123",
+        "name": "Luffy",
+        "lastname": "Monkey D."
+    }, 
+    {
+        "username": "zoro",
+        "password": "gatos123",
+        "name": "Zoro",
+        "lastname": "Roronoa"
+    },{
+        "username": "nami",
+        "password": "gatos123",
+        "name": "Nami",
+        "lastname": ""
+    },{
+        "username": "sanji",
+        "password": "gatos123",
+        "name": "Sanji",
+        "lastname": "Vinsmoke"
+    },
+    {
+        "username": "usopp",
+        "password": "gatos123",
+        "name": "Usopp",
+        "lastname": ""
+    },
+    {
+        "username": "robin",
+        "password": "gatos123",
+        "name" : "Robin",
+        "lastname": "Nico"
+    }, {
+        "username": "chopper",
+        "password": "gatos123",
+        "name": "Chopper",
+        "lastname": "Tony Tony"
+    }, {
+        "username": "franky",
+        "password": "gatos123",
+        "name": "Cutty",
+        "lastname": "Flam"
+    }
+]

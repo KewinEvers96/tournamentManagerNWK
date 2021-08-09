@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+{% if message %}
+<div class="container">
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+</div>
+{% endif %}
+<div class="container">
+    <form method="POST" action="{% url 'tournament:tournament_uninscription' tournament_id %}">
+        {% csrf_token %}
+        <p>Are you sure you want to unenroll to <b>{{ tournament_name }}</b></p>
+        <input value="Unroll" type="submit" class="btn btn-danger">
+    </form>
+</div>
+{% endblock %}

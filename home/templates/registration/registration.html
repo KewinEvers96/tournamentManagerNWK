@@ -1,0 +1,17 @@
+{% extends 'home.html' %} 
+{% block title %}Sign Up{% endblock %}
+{% block h1 %}Sign Up{% endblock %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<div class="container my-5">
+    {% if form.errors %}<div class="alert alert-danger" role="alert">{{ form.errors }}</div>{% endif %}
+    <form action="{% url 'home:signUp' %}" method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" class="btn btn-success" value="Sign Up">
+        <a href="{% url 'home:index' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}
