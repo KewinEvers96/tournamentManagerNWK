@@ -77,5 +77,10 @@
             </ul>
         </div>
     </div>
+    <div class="container row">
+        {% if perms.tournament and perms.tournament.add_match and object.organizer.user.id == request.user.id and not matches%}
+            <a class="btn btn-primary" href="{% url 'tournament:generate_matchlist' object.id %}" >Generate Matches</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
