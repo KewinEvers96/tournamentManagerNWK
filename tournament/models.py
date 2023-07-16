@@ -34,6 +34,9 @@ class Tournament(models.Model):
     tournamentType = models.CharField(max_length = 2,
                                         choices = TYPE_CHOICES,
                                         default = ELIMINATION)
+    # Will help us to check the ownership of the tournament!
+    def checkOrganizer(self, competitor: Competitor):
+        return self.organizer == competitor
 
     def __str__(self):
         return "{}- ({} / {})".format(self.name, self.competitors.count(), self.maxParticipants, )

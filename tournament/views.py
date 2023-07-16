@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Tournament, Competitor, Participation, Match
 from django.forms.widgets import DateInput
 
@@ -139,6 +139,24 @@ class TournamentUninscriptionView(LoginRequiredMixin, View):
         except Participation.DoesNotExist as e:
             request.session['message'] = 'You are not enrolled in this tournament'
             return redirect(reverse('tournament:tournament_detail'), args= [pk])
+
+
+class GenerateMatchList(PermissionRequiredMixin, View):
+    permission_required = 'tournament.add_match'
+
+    def get(self, request, pk):
+        tournament = Tournament.objects.get(pk = pk)
+        userOrganizerProfile = Competitor.objects.get(pk = request.user.id)
+        if tournament.checkOrganizer(userOrganizerProfile):
+            return render(request, "tournament/match_creation_list_confirm.html")
+        else:
+            request.session['message'] = 'You are not allowed to that action'
+            return redirect(reverse('tourament:tournament_detail', args= [pk]))
+
+    def post(self, request, pk):
+        tournament = Tournament.objects.get(pk = pk)
+        
+        pass
 
 
 class MatchListView(View):
